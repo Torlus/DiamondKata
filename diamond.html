@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<pre id="out"></pre>
+<script>
+
+sb = [];
+alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function spaces(n) {
+  while(n-- > 0)
+    sb.push('-');
+}
+
+function build(c, level, dir) {
+  if (c == 0) {
+      spaces(level);
+      sb.push('A');
+      spaces(level);
+      sb.push('\n');
+  } else {
+      if (dir <= 0) {
+          build(c - 1, level + 1, -1);
+      }
+      spaces(level);
+      sb.push(alph.charAt(c));
+      spaces(2*c-1);
+      sb.push(alph.charAt(c));
+      spaces(level);
+      sb.push('\n');
+      if (dir >= 0) {
+          build(c - 1, level + 1, 1);
+      }
+    }
+}
+
+function create(root) {
+  sb = []
+  build(alph.indexOf(root), 0, 0);
+  sb.map(function(c) { e = document.getElementById('out').innerText += c; })
+}
+
+create('Z');
+
+</script>
