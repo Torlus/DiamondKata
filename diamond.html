@@ -2,42 +2,43 @@
 <pre id="out"></pre>
 <script>
 
-sb = [];
 alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function print(c) {
+  document.getElementById('out').innerText += c;
+}
 
 function spaces(n) {
   while(n-- > 0)
-    sb.push('-');
+    print('-');
 }
 
 function build(c, level, dir) {
   if (c == 0) {
       spaces(level);
-      sb.push('A');
+      print('A');
       spaces(level);
-      sb.push('\n');
-  } else {
+      print('\n');
+  } else if (c > 0) {
       if (dir <= 0) {
           build(c - 1, level + 1, -1);
       }
       spaces(level);
-      sb.push(alph.charAt(c));
+      print(alph.charAt(c));
       spaces(2*c-1);
-      sb.push(alph.charAt(c));
+      print(alph.charAt(c));
       spaces(level);
-      sb.push('\n');
+      print('\n');
       if (dir >= 0) {
           build(c - 1, level + 1, 1);
       }
     }
 }
 
-function create(root) {
-  sb = []
+function diamond(root) {
   build(alph.indexOf(root), 0, 0);
-  sb.map(function(c) { e = document.getElementById('out').innerText += c; })
 }
 
-create('Z');
+diamond('Z');
 
 </script>
